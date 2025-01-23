@@ -47,17 +47,17 @@ public:
     /**
      * @brief 初始化窗口
      */
-    virtual void init() = 0;
+    virtual void init();
 
     /**
      * @brief 关闭窗口
      */
-    virtual void close() = 0;
+    virtual void close();
 
     /**
      * @brief 渲染窗口
      */
-    virtual void render() = 0;
+    virtual void render();
 
     /**
      * @brief 获取窗口标题

@@ -20,6 +20,18 @@ WindowBase::WindowBase(std::string title, int width, int height)
 {
 }
 
+void WindowBase::init()
+{
+}
+
+void WindowBase::close()
+{
+}
+
+void WindowBase::render()
+{
+}
+
 const std::string & WindowBase::getTitle() const
 {
     return m_windowData.m_title;
