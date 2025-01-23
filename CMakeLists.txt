@@ -28,7 +28,7 @@ target_link_libraries(ww-engine INTERFACE
     core
     functions
     platform
-    resources
+    # resources
     third-party
 )
 
