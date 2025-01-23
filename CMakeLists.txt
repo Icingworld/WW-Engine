@@ -1,8 +1,14 @@
+cmake_minimum_required(VERSION 3.10)
+project(ww-engine VERSION 0.0.1)
+
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 # 添加子模块
 add_subdirectory(core)
 add_subdirectory(functions)
 add_subdirectory(platform)
-add_subdirectory(resources)
+# add_subdirectory(resources)
 add_subdirectory(third-party)
 
 # 创建 ww-engine 库
