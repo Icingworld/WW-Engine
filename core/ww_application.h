@@ -3,6 +3,7 @@
 #include "ww_timer.h"
 #include "ww_task_pool.h"
 #include <layer/ww_layer_stack.h>
+#include <window/ww_window.h>
 
 namespace engine
 {
@@ -13,9 +14,6 @@ namespace engine
 class Application
 {
 protected:
-    // 单例
-    static Application m_app;   // 单例
-
     // 运行状态
     bool m_isRunning;           // 是否正在运行
     bool m_isPaused;            // 是否暂停
@@ -32,9 +30,10 @@ protected:
     LayerStack m_layerStack;    // 图层栈
 
     // 窗口
+    Window * m_window;          // 窗口
 
 protected:
-    Application(int argc, char ** argv);
+    Application(Window * window = nullptr, int argc = 0, char ** argv = nullptr);
 
     Application(const Application &) = delete;
 
@@ -43,11 +42,45 @@ protected:
     virtual ~Application();
 
 public:
-    static Application & createApplication(int argc, char ** argv);
+    /**
+     * @brief 获取应用单例
+     */
+    static Application & getApplication(Window * window = nullptr, int argc = 0, char ** argv = nullptr);
 
-    static Application & getApplication();
+    /**
+     * @brief 主循环
+     */
+    void run();
 
-public:
+    /**
+     * @brief 停止循环
+     */
+    void stop();
+
+    /**
+     * @brief 提交任务
+     */
+    void submitTask(std::function<void()> task);
+
+    /**
+     * @brief 执行所有任务
+     */
+    void executeTasks();
+
+    /**
+     * @brief 添加普通图层
+     */
+    void pushLayer(Layer * layer);
+
+    /**
+     * @brief 添加覆盖图层
+     */
+    void pushOverlay(Layer * layer);
+
+    /**
+     * @brief 事件处理
+     */
+    void onEvent(Event & event);
 };
 
 } // namespace engine
