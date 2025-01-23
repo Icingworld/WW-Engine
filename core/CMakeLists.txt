@@ -7,6 +7,7 @@ add_library(core STATIC ${SOURCES})
 # 添加搜索路径
 target_include_directories(core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/wwstl
 )
 
 # 添加依赖项
