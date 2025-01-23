@@ -3,7 +3,7 @@
 namespace engine
 {
 
-using key_code_type = unsigned short;   // 键盘码
+using key_code_type = unsigned short;   // 键码
 
 enum class KeyCode : key_code_type
 {
