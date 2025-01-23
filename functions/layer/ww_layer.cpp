@@ -8,6 +8,26 @@ Layer::Layer(const std::string & name)
 {
 }
 
+void Layer::onAttach()
+{
+}
+
+void Layer::onDetach()
+{
+}
+
+void Layer::onUpdate(TimeStep ts)
+{
+}
+
+void Layer::onImGuiRender()
+{
+}
+
+void Layer::onEvent(Event & event)
+{
+}
+
 const std::string & Layer::getName() const
 {
     return m_layerName;
