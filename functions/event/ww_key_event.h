@@ -15,7 +15,7 @@ protected:
     KeyCode m_keyCode;  // 键码
 
 public:
-    explicit KeyEvent(KeyCode code, EventType type = EventType::None);
+    KeyEvent(KeyCode code, EventType type = EventType::None);
 
     ~KeyEvent() = default;
 
@@ -25,9 +25,6 @@ public:
      */
     KeyCode getKeyCode() const;
 
-    /**
-     * @brief 获取按键事件名称
-     */
     const char * getName() const override;
 };
 
@@ -45,14 +42,8 @@ public:
     ~KeyPressedEvent() = default;
 
 public:
-    /**
-     * @brief 获取按键事件名称
-     */
     const char * getName() const override;
 
-    /**
-     * @brief 获取事件类型
-     */
     static EventType getStaticType();
 };
 
@@ -67,14 +58,8 @@ public:
     ~KeyReleasedEvent() = default;
 
 public:
-    /**
-     * @brief 获取按键事件名称
-     */
     const char * getName() const override;
 
-    /**
-     * @brief 获取事件类型
-     */
     static EventType getStaticType();
 };
 
@@ -86,14 +71,8 @@ public:
     ~KeyTypedEvent() = default;
 
 public:
-    /**
-     * @brief 获取按键事件名称
-     */
     const char * getName() const override;
 
-    /**
-     * @brief 获取事件类型
-     */
     static EventType getStaticType();
 };
 
