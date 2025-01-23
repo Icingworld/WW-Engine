@@ -25,3 +25,14 @@ target_link_libraries(ww-engine INTERFACE
     resources
     third-party
 )
+
+# 设置 test 选项
+option(ENABLE_TEST "Enable Test" OFF)
+
+# 编译引擎测试
+if (ENABLE_TEST)
+    message(STATUS "Test enabled")
+    add_subdirectory(test)
+else()
+    message(STATUS "Test disabled")
+endif()
