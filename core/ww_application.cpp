@@ -6,7 +6,7 @@
 namespace engine
 {
 
-Application::Application(Window * window = nullptr, int argc = 0, char ** argv = nullptr)
+Application::Application(int argc, char ** argv)
     : m_isRunning(true)
     , m_isPaused(false)
     , m_isMinimized(false)
@@ -14,17 +14,8 @@ Application::Application(Window * window = nullptr, int argc = 0, char ** argv =
     , m_timer()
     , m_taskPool()
     , m_layerStack()
-    , m_window(window)
+    , m_window(nullptr)
 {
-    if (m_window == nullptr) {
-        // 没有传入窗口，使用默认窗口
-        m_window = new Window();
-    }
-
-    // 注册回调函数
-    m_window->setEventCallback([this](Event & event) {
-        this->onEvent(event);
-    });
 }
 
 Application::~Application()
@@ -32,10 +23,20 @@ Application::~Application()
     delete m_window;
 }
 
-Application & Application::getApplication(Window * window, int argc, char ** argv)
+Application & Application::getApplication(int argc, char ** argv)
 {
-    static Application app(window, argc, argv);
+    static Application app(argc, argv);
     return app;
+}
+
+void Application::bindWindow(Window * window)
+{
+    m_window = window;
+
+    // 设置窗口回调函数
+    m_window->setEventCallback([this](Event & event) {
+        this->onEvent(event);
+    });
 }
 
 void Application::run()
@@ -46,7 +47,7 @@ void Application::run()
         TimeStep timestep = time - m_lastFrameTime;
         m_lastFrameTime = time;
 
-        // 逻辑更新
+        // 执行任务
         executeTasks();
 
         // 渲染更新

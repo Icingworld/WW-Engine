@@ -33,7 +33,7 @@ protected:
     Window * m_window;          // 窗口
 
 protected:
-    Application(Window * window = nullptr, int argc = 0, char ** argv = nullptr);
+    Application(int argc = 0, char ** argv = nullptr);
 
     Application(const Application &) = delete;
 
@@ -45,7 +45,12 @@ public:
     /**
      * @brief 获取应用单例
      */
-    static Application & getApplication(Window * window = nullptr, int argc = 0, char ** argv = nullptr);
+    static Application & getApplication(int argc = 0, char ** argv = nullptr);
+
+    /**
+     * @brief 设置窗口
+     */
+    void bindWindow(Window * window);
 
     /**
      * @brief 主循环
