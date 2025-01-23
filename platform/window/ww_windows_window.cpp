@@ -55,6 +55,16 @@ void WindowsWindow::init()
     // 设置回调函数
     glfwSetWindowUserPointer(m_window, &m_windowData);
 
+    // 窗口关闭回调
+    glfwSetWindowCloseCallback(m_window, [](GLFWwindow * window) {
+        // 获取 WindowData
+        WindowData * data = (WindowData *)glfwGetWindowUserPointer(window);
+
+        // 创建事件并下发
+        WindowCloseEvent event;
+        data->m_eventCallback(event);
+    });
+
     // 窗口大小回调
     glfwSetFramebufferSizeCallback(m_window, [](GLFWwindow * window, int width, int height) {
         // 获取 WindowData
