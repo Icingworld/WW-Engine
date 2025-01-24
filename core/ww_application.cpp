@@ -37,6 +37,10 @@ void Application::bindWindow(Window * window)
     m_window->setEventCallback([this](Event & event) {
         this->onEvent(event);
     });
+
+    // 绑定 ImGui 图层
+    m_imguiLayer = new ImGuiLayer(m_window->getWindow());
+    pushOverlay(m_imguiLayer);
 }
 
 void Application::run()
@@ -56,6 +60,13 @@ void Application::run()
             for (auto & layer : m_layerStack) {
                 layer->onUpdate(timestep);
             }
+
+            // 渲染 ImGui 图层
+            m_imguiLayer->begin();
+            for (auto & layer : m_layerStack) {
+                layer->onImGuiRender();
+            }
+            m_imguiLayer->end();
         }
         // 渲染到屏幕
         m_window->render();

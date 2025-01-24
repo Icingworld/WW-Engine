@@ -4,6 +4,7 @@
 #include "ww_task_pool.h"
 #include <layer/ww_layer_stack.h>
 #include <window/ww_window.h>
+#include <imgui/ww_imgui_layer.h>
 
 namespace engine
 {
@@ -28,6 +29,7 @@ protected:
 
     // 图层
     LayerStack m_layerStack;    // 图层栈
+    ImGuiLayer * m_imguiLayer;  // ImGui 图层
 
     // 窗口
     Window * m_window;          // 窗口
