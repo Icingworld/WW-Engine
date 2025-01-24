@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_subdirectory(core)
 add_subdirectory(functions)
 add_subdirectory(platform)
-# add_subdirectory(resources)
+add_subdirectory(resources)
 add_subdirectory(third-party)
 
 # 创建 ww-engine 库
@@ -28,7 +28,7 @@ target_link_libraries(ww-engine INTERFACE
     core
     functions
     platform
-    # resources
+    resources
     third-party
 )
 
