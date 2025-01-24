@@ -1,6 +1,7 @@
 #include "main_window.h"
 
 #include "sky_layer.h"
+#include "object_layer.h"
 
 MainWindow::MainWindow()
     : engine::Window()
@@ -13,5 +14,8 @@ MainWindow::MainWindow()
 
     // 添加图层
     SkyLayer * skyLayer = new SkyLayer("SkyLayer");
-    m_app.pushLayer(skyLayer);
+    m_app.pushLayer(skyLayer);          // 添加天空图层，需要最先渲染
+
+    ObjectLayer * objectLayer = new ObjectLayer("ObjectLayer");
+    m_app.pushLayer(objectLayer);       // 添加具体的某个图层
 }
