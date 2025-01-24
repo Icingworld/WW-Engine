@@ -33,7 +33,7 @@ target_include_directories(third-party INTERFACE
 # 搜索 OpenGL
 find_package(OpenGL REQUIRED)
 
-# 添加依赖项
+# 添加 third-party 依赖项
 target_link_libraries(third-party INTERFACE
     OpenGL::GL
     glfw
