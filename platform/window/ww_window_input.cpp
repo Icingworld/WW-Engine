@@ -1,5 +1,3 @@
-#pragma once
-
 #include <ww_input.h>
 #include <ww_application.h>
 #include <GLFW/glfw3.h>
