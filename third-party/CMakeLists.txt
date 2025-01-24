@@ -22,6 +22,34 @@ target_include_directories(stb_image INTERFACE
     ${CMAKE_CURRENT_SOURCE_DIR}/stb_image
 )
 
+# 搜索 imgui 源码
+set(IMGUI_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui/imgui.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui/imgui_demo.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui/imgui_draw.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui/imgui_tables.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui/imgui_widgets.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends/imgui_impl_opengl3.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends/imgui_impl_glfw.cpp
+)
+
+# 创建 imgui 库
+add_library(imgui STATIC
+    ${IMGUI_SOURCES}
+)
+
+# 添加 imgui 搜索路径
+target_include_directories(imgui PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends
+)
+
+# 添加 imgui 依赖项
+target_link_libraries(imgui PRIVATE
+    glfw
+    glad
+)
+
 # 创建 third-party 库
 add_library(third-party INTERFACE)
 
@@ -40,4 +68,5 @@ target_link_libraries(third-party INTERFACE
     glad
     glm
     stb_image
+    imgui
 )
