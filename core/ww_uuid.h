@@ -33,6 +33,10 @@ public:
      * @brief 将唯一标识符转换为字符串
      */
     std::string toString() const;
+
+    bool operator==(const UUID & other) const;
+
+    bool operator!=(const UUID & other) const;
 };
 
 } // namespace engine

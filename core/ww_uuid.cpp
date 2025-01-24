@@ -30,4 +30,14 @@ std::string UUID::toString() const
     return ss.str();
 }
 
+bool UUID::operator==(const UUID & other) const
+{
+    return m_UUID == other.m_UUID;
+}
+
+bool UUID::operator!=(const UUID & other) const
+{
+    return !(*this == other);
+}
+
 } // namespace engine
