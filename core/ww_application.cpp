@@ -113,4 +113,9 @@ void Application::onEvent(Event & event)
     }
 }
 
+Window * Application::getWindow() const
+{
+    return m_window;
+}
+
 } // namespace engine

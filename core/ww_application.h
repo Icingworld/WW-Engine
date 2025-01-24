@@ -86,6 +86,8 @@ public:
      * @brief 事件处理
      */
     void onEvent(Event & event);
+
+    Window * getWindow() const;
 };
 
 } // namespace engine
