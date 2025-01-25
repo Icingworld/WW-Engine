@@ -11,7 +11,12 @@ namespace engine
  */
 class FileSystem
 {
+protected:
+    std::string m_currentDirectory;     // 当前工作目录
+
 public:
+    FileSystem();
+
     virtual ~FileSystem() = default;
 
 public:
@@ -69,6 +74,11 @@ public:
      * @brief 删除文件
      */
     virtual void remove(const std::string & path, bool isAbsolute = false) const = 0;
+
+    /**
+     * @brief 将相对路径转换为绝对路径
+     */
+    virtual std::string toFullPath(const std::string & path) const = 0;
 };
 
 } // namespace engine
