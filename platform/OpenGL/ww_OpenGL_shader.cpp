@@ -1,9 +1,8 @@
 #include "ww_OpenGL_shader.h"
 
 #include <glad/glad.h>
-#include <sstream>
 #include <iostream>
-#include <fstream>
+#include "../file_system/ww_windows_file_system.h"
 
 namespace engine
 {
@@ -72,33 +71,12 @@ void OpenGLShader::setMat4(glm::mat4 value)
 
 void OpenGLShader::compileShader(const std::string & vertexPath, const std::string & fragmentPath)
 {
-    std::string vertexCode;
-    std::string fragmentCode;
-
-    std::ifstream vertexShaderFile;
-    std::ifstream fragmentShaderFile;
+    WindowsFileSystem fileSystem;
     
-    vertexShaderFile.exceptions (std::ifstream::failbit | std::ifstream::badbit);
-    fragmentShaderFile.exceptions (std::ifstream::failbit | std::ifstream::badbit);
+    std::string vertexCode = fileSystem.readText(vertexPath);
+    std::string fragmentCode = fileSystem.readText(fragmentPath);
 
-    try {
-        vertexShaderFile.open(vertexPath);
-        fragmentShaderFile.open(fragmentPath);
-        std::stringstream vShaderStream, fShaderStream;
-
-        vShaderStream << vertexShaderFile.rdbuf();
-        fShaderStream << fragmentShaderFile.rdbuf();
-
-        vertexShaderFile.close();
-        fragmentShaderFile.close();
-
-        vertexCode = vShaderStream.str();
-        fragmentCode = fShaderStream.str();
-    } catch (std::ifstream::failure& e) {
-        std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << e.what() << std::endl;
-    }
-
-    const char* vertexShaderCode = vertexCode.c_str();
+    const char * vertexShaderCode = vertexCode.c_str();
     const char * fragmentShaderCode = fragmentCode.c_str();
 
     // 编译着色器
@@ -112,18 +90,23 @@ void OpenGLShader::compileShader(const std::string & vertexPath, const std::stri
     fragment = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragment, 1, &fragmentShaderCode, nullptr);
     glCompileShader(fragment);
-    checkCompileErrors(vertex, "FRAGMENT");
+    checkCompileErrors(fragment, "FRAGMENT");
 
     // 着色器程序
     m_shaderID = glCreateProgram();
     glAttachShader(m_shaderID, vertex);
     glAttachShader(m_shaderID, fragment);
     glLinkProgram(m_shaderID);
-    checkCompileErrors(vertex, "PROGRAM");
+    checkCompileErrors(m_shaderID, "PROGRAM");
 
     // 删除着色器
     glDeleteShader(vertex);
     glDeleteShader(fragment);
+}
+
+OpenGLShader OpenGLShader::create(std::string name)
+{
+    return OpenGLShader(name);
 }
 
 void OpenGLShader::checkCompileErrors(unsigned int shader, std::string type)

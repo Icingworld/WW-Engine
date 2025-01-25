@@ -5,6 +5,9 @@
 namespace engine
 {
 
+/**
+ * @brief OpenGL着色器
+ */
 class OpenGLShader : public Shader
 {
 public:
@@ -37,7 +40,12 @@ public:
     /**
      * @brief 编译顶点着色器和片段着色器
      */
-    void compileShader(const std::string & vertexShader, const std::string & fragmentShader); 
+    void compileShader(const std::string & vertexShader, const std::string & fragmentShader);
+
+    /**
+     * @brief 创建OpenGL着色器
+     */
+    static OpenGLShader create(std::string name);
 
 private:
     /**
