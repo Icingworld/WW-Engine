@@ -32,21 +32,21 @@ public:
      */
     virtual void unbind() = 0;
 
-    virtual void setBool(bool value) = 0;
+    virtual void setBool(std::string name, bool value) = 0;
 
-    virtual void setInt(int value) = 0;
+    virtual void setInt(std::string name, int value) = 0;
 
-    virtual void setFloat(float value) = 0;
+    virtual void setFloat(std::string name, float value) = 0;
 
-    virtual void setVec2(glm::vec2 value) = 0;
+    virtual void setVec2(std::string name, glm::vec2 value) = 0;
 
-    virtual void setVec3(glm::vec3 value) = 0;
+    virtual void setVec3(std::string name, glm::vec3 value) = 0;
 
-    virtual void setVec4(glm::vec4 value) = 0;
+    virtual void setVec4(std::string name, glm::vec4 value) = 0;
 
-    virtual void setMat3(glm::mat3 value) = 0;
+    virtual void setMat3(std::string name, glm::mat3 value) = 0;
 
-    virtual void setMat4(glm::mat4 value) = 0;
+    virtual void setMat4(std::string name, glm::mat4 value) = 0;
 
     const std::string & getName() const;
 };

@@ -29,44 +29,44 @@ void OpenGLShader::unbind()
     glUseProgram(0);
 }
 
-void OpenGLShader::setBool(bool value)
+void OpenGLShader::setBool(std::string name, bool value)
 {
-    glUniform1i(glGetUniformLocation(m_shaderID, m_name.c_str()), static_cast<int>(value));
+    glUniform1i(glGetUniformLocation(m_shaderID, name.c_str()), static_cast<int>(value));
 }
 
-void OpenGLShader::setInt(int value)
+void OpenGLShader::setInt(std::string name, int value)
 {
-    glUniform1i(glGetUniformLocation(m_shaderID, m_name.c_str()), value);
+    glUniform1i(glGetUniformLocation(m_shaderID, name.c_str()), value);
 }
 
-void OpenGLShader::setFloat(float value)
+void OpenGLShader::setFloat(std::string name, float value)
 {
-    glUniform1f(glGetUniformLocation(m_shaderID, m_name.c_str()), value);
+    glUniform1f(glGetUniformLocation(m_shaderID, name.c_str()), value);
 }
 
-void OpenGLShader::setVec2(glm::vec2 value)
+void OpenGLShader::setVec2(std::string name, glm::vec2 value)
 {
-    glUniform2f(glGetUniformLocation(m_shaderID, m_name.c_str()), value.x, value.y);
+    glUniform2f(glGetUniformLocation(m_shaderID, name.c_str()), value.x, value.y);
 }
 
-void OpenGLShader::setVec3(glm::vec3 value)
+void OpenGLShader::setVec3(std::string name, glm::vec3 value)
 {
-    glUniform3f(glGetUniformLocation(m_shaderID, m_name.c_str()), value.x, value.y, value.z);
+    glUniform3f(glGetUniformLocation(m_shaderID, name.c_str()), value.x, value.y, value.z);
 }
 
-void OpenGLShader::setVec4(glm::vec4 value)
+void OpenGLShader::setVec4(std::string name, glm::vec4 value)
 {
-    glUniform4f(glGetUniformLocation(m_shaderID, m_name.c_str()), value.x, value.y, value.z, value.w);
+    glUniform4f(glGetUniformLocation(m_shaderID, name.c_str()), value.x, value.y, value.z, value.w);
 }
 
-void OpenGLShader::setMat3(glm::mat3 value)
+void OpenGLShader::setMat3(std::string name, glm::mat3 value)
 {
-    glUniformMatrix3fv(glGetUniformLocation(m_shaderID, m_name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
+    glUniformMatrix3fv(glGetUniformLocation(m_shaderID, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
 }
 
-void OpenGLShader::setMat4(glm::mat4 value)
+void OpenGLShader::setMat4(std::string name, glm::mat4 value)
 {
-    glUniformMatrix4fv(glGetUniformLocation(m_shaderID, m_name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
+    glUniformMatrix4fv(glGetUniformLocation(m_shaderID, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
 }
 
 void OpenGLShader::compileShader(const std::string & vertexPath, const std::string & fragmentPath)

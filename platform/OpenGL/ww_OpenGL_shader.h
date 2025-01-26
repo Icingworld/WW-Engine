@@ -20,21 +20,21 @@ public:
 
     void unbind() override;
 
-    void setBool(bool value) override;
+    void setBool(std::string name, bool value) override;
 
-    void setInt(int value) override;
+    void setInt(std::string name, int value) override;
 
-    void setFloat(float value) override;
+    void setFloat(std::string name, float value) override;
 
-    void setVec2(glm::vec2 value) override;
+    void setVec2(std::string name, glm::vec2 value) override;
 
-    void setVec3(glm::vec3 value) override;
+    void setVec3(std::string name, glm::vec3 value) override;
 
-    void setVec4(glm::vec4 value) override;
+    void setVec4(std::string name, glm::vec4 value) override;
 
-    void setMat3(glm::mat3 value) override;
+    void setMat3(std::string name, glm::mat3 value) override;
 
-    void setMat4(glm::mat4 value) override;
+    void setMat4(std::string name, glm::mat4 value) override;
 
 public:
     /**
