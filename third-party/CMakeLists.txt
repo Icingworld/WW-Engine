@@ -56,6 +56,7 @@ add_library(third-party INTERFACE)
 # 添加 third-party 搜索路径
 target_include_directories(third-party INTERFACE
     ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/stb_image
 )
 
 # 搜索 OpenGL
