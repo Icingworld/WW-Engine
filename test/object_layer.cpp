@@ -11,6 +11,9 @@ ObjectLayer::ObjectLayer(std::string name)
 
 void ObjectLayer::onUpdate(engine::TimeStep ts)
 {
+    // 激活纹理
+    m_cube.activeTexture();
+
     // 渲染
     m_shader.bind();    // 激活着色器程序
 

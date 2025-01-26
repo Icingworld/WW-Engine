@@ -4,6 +4,7 @@
 
 Cube::Cube()
     : m_vertexArray()
+    , m_texture("assets/texture/grass_block_side.jpg")
 {
     // 初始化立方体顶点
 
@@ -82,6 +83,10 @@ Cube::Cube()
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
+    // 激活纹理坐标
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(6 * sizeof(float)));
+    glEnableVertexAttribArray(2);
+
     // 绑定到VAO
     m_vertexArray.addVBO(vbo);
 
@@ -100,6 +105,12 @@ Cube::Cube()
 
 Cube::~Cube()
 {
+}
+
+void Cube::activeTexture()
+{
+    // 激活纹理
+    m_texture.bind();
 }
 
 void Cube::draw()

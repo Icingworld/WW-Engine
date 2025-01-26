@@ -2,6 +2,7 @@
 
 #include <OpenGL/ww_OpenGL_vertex_array.h>
 #include <glm/glm.hpp>
+#include <OpenGL/ww_OpenGL_texture.h>
 
 /**
  * @brief 立方体
@@ -13,12 +14,19 @@ public:
 
     engine::OpenGLVertexArray m_vertexArray;    // 顶点数组
 
+    engine::OpenGLTexture2D m_texture;          // 纹理
+
 public:
     Cube();
 
     ~Cube();
 
 public:
+    /**
+     * @brief 激活纹理
+     */
+    void activeTexture();
+
     /**
      * @brief 渲染
      */
