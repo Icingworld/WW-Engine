@@ -12,6 +12,10 @@ class Cube
 public:
     glm::vec3 m_position;                       // 位置
 
+    float m_angle;                              // 角度
+    float m_rotationSpeed;                      // 旋转速度
+    glm::vec3 m_axis;                           // 旋转轴
+
     engine::OpenGLVertexArray m_vertexArray;    // 顶点数组
 
     engine::OpenGLTexture2D m_texture;          // 纹理

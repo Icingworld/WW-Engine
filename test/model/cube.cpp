@@ -3,7 +3,11 @@
 #include <glad/glad.h>
 
 Cube::Cube()
-    : m_vertexArray()
+    : m_position(0.0f, 0.0f, 0.0f)
+    , m_angle(0.0f)
+    , m_rotationSpeed(1.0f)
+    , m_axis(0.0f, 1.0f, 0.0f)
+    , m_vertexArray()
     , m_texture("assets/texture/grass_block_side.jpg")
 {
     // 初始化立方体顶点

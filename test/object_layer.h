@@ -13,6 +13,10 @@ public:
     engine::OpenGLShader m_shader;
     Cube m_cube;        // 示例立方体
 
+    float m_time[100];     // 100帧的时间
+    unsigned int m_frame = 0;   // 当前帧
+    float m_fps = 0.0f;     // 帧率
+
 public:
     ObjectLayer(std::string name);
 
