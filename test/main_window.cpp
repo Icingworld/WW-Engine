@@ -4,7 +4,7 @@
 #include "object_layer.h"
 
 MainWindow::MainWindow()
-    : engine::Window()
+    : engine::Window("MainWindow", 600, 600)
     , m_app(engine::Application::getApplication())
 {
     glEnable(GL_DEPTH_TEST);            // 启用深度测试
