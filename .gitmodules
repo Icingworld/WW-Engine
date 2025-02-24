@@ -7,3 +7,6 @@
 [submodule "third-party/imgui"]
 	path = third-party/imgui
 	url = https://github.com/ocornut/imgui.git
+[submodule "third-party/rttr"]
+	path = third-party/rttr
+	url = https://github.com/rttrorg/rttr.git
