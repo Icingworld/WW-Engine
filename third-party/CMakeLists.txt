@@ -46,7 +46,7 @@ target_link_libraries(imgui PRIVATE
 add_subdirectory(json)
 
 # 添加 rttr 子模块
-add_subdirectory(rttr)
+# add_subdirectory(rttr)
 
 # 添加 spdlog 子模块
 add_subdirectory(spdlog)
@@ -78,8 +78,8 @@ target_link_libraries(third-party INTERFACE
     glfw
     glm
     imgui
-    json
-    rttr
+    nlohmann_json
+    # rttr
     spdlog
     stb_image
 )
