@@ -9,8 +9,8 @@ add_library(ww-engine INTERFACE)
 # 链接 ww-engine 库
 target_link_libraries(ww-engine INTERFACE
     engine-core
-    engine-function
-    engine-platform
-    engine-resource
+    # engine-function
+    # engine-platform
+    # engine-resource
     third-party
 )
