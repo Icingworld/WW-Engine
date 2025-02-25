@@ -1,15 +1,15 @@
 #include "w_uuid.h"
 
-#include <random>
 #include <iomanip>
 #include <sstream>
+
+#include "../random/w_random.h"
 
 namespace engine
 {
 
-static std::random_device s_rd;
-static std::mt19937 s_gen(s_rd());
-static std::uniform_int_distribution<> s_dist(0, 255);
+static std::random_device s_random_device;
+static WDistributionRandomGenerator<std::uniform_int_distribution<>> s_dist(s_random_device(), 0, 255);
 
 WUUID::WUUID()
 {
@@ -19,7 +19,7 @@ WUUID::WUUID()
 void WUUID::generate()
 {
     for (auto & byte : m_UUID) {
-        byte = static_cast<uint8_t>(s_dist(s_gen));
+        byte = static_cast<unsigned char>(s_dist.generate());
     }
 
     m_UUID[6] = (m_UUID[6] & 0x0F) | 0x40;  // 设置版本号为 4
