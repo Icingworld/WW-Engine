@@ -11,12 +11,12 @@ static std::random_device s_rd;
 static std::mt19937 s_gen(s_rd());
 static std::uniform_int_distribution<> s_dist(0, 255);
 
-UUID::UUID()
+WUUID::WUUID()
 {
     generate();
 }
 
-void UUID::generate()
+void WUUID::generate()
 {
     for (auto & byte : m_UUID) {
         byte = static_cast<uint8_t>(s_dist(s_gen));
@@ -26,7 +26,7 @@ void UUID::generate()
     m_UUID[8] = (m_UUID[8] & 0x3F) | 0x80;  // 设置变体为 RFC4122
 }
 
-std::string UUID::toString() const
+std::string WUUID::toString() const
 {
     std::stringstream ss;
     for (int i = 0; i < 16; ++i) {
@@ -38,12 +38,12 @@ std::string UUID::toString() const
     return ss.str();
 }
 
-bool UUID::operator==(const UUID & other) const
+bool WUUID::operator==(const WUUID & other) const
 {
     return m_UUID == other.m_UUID;
 }
 
-bool UUID::operator!=(const UUID & other) const
+bool WUUID::operator!=(const WUUID & other) const
 {
     return !(*this == other);
 }

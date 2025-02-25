@@ -10,15 +10,15 @@ namespace engine
  * @brief 唯一标识符
  * @version UUIDv4
  */
-class UUID
+class WUUID
 {
 private:
     std::array<unsigned char, 16> m_UUID;    // 128位唯一标识符
 
 public:
-    UUID();
+    WUUID();
 
-    virtual ~UUID() = default;
+    virtual ~WUUID() = default;
 
 public:
     /**
@@ -31,9 +31,9 @@ public:
      */
     std::string toString() const;
 
-    bool operator==(const UUID & other) const;
+    bool operator==(const WUUID & other) const;
 
-    bool operator!=(const UUID & other) const;
+    bool operator!=(const WUUID & other) const;
 };
 
 } // namespace engine
