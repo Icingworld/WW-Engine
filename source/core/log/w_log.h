@@ -33,6 +33,9 @@ public:
     ~WLog();
 
 public:
+    /**
+     * @brief 打印日志
+     */
     template <typename... Args>
     void log(WLogLevel level, Args&&... args)
     {
@@ -55,15 +58,19 @@ public:
             break;
         case WLogLevel::critical:
             m_logger->critical(std::forward<Args>(args)...);
-            criticalCallback(std::forward<Args>(args)...);
+            _criticalCallback(std::forward<Args>(args)...);
             break;
         default:
             break;
         }
     }
 
+private:
+    /**
+     * @brief 致命错误回调函数
+     */
     template <typename... Args>
-    [[noreturn]] void criticalCallback(Args&&... args) const
+    [[noreturn]] void _criticalCallback(Args&&... args) const
     {
         const std::string format = fmt::format(std::forward<Args>(args)...);
         throw std::runtime_error(format);
