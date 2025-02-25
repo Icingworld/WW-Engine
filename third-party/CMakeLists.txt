@@ -1,3 +1,6 @@
+# 添加 entt 子模块
+add_subdirectory(entt)
+
 # 创建 glad 库
 add_library(glad STATIC 
     ${CMAKE_CURRENT_SOURCE_DIR}/glad/src/glad.c
@@ -74,12 +77,12 @@ find_package(OpenGL REQUIRED)
 # 添加 third-party 依赖项
 target_link_libraries(third-party INTERFACE
     OpenGL::GL
+    EnTT
     glad
     glfw
     glm
     imgui
     nlohmann_json
-    # rttr
     spdlog
     stb_image
 )
