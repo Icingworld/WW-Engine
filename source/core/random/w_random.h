@@ -8,84 +8,84 @@ namespace engine
 {
 
 template <typename NumberType>
-class WUniformDistribution
+class _WUniformDistribution
 {
     // 非int和real类型无效
     WW_ASSERT_MSG(false, "invalid type for uniform distribution, int and real only");
 };
 
 template <>
-class WUniformDistribution<short>
+class _WUniformDistribution<short>
 {
 public:
     using type = std::uniform_int_distribution<short>;
 };
 
 template <>
-class WUniformDistribution<int>
+class _WUniformDistribution<int>
 {
 public:
     using type = std::uniform_int_distribution<int>;
 };
 
 template <>
-class WUniformDistribution<long>
+class _WUniformDistribution<long>
 {
 public:
     using type = std::uniform_int_distribution<long>;
 };
 
 template <>
-class WUniformDistribution<long long>
+class _WUniformDistribution<long long>
 {
 public:
     using type = std::uniform_int_distribution<long long>;
 };
 
 template <>
-class WUniformDistribution<unsigned short>
+class _WUniformDistribution<unsigned short>
 {
 public:
     using type = std::uniform_int_distribution<unsigned short>;
 };
 
 template <>
-class WUniformDistribution<unsigned int>
+class _WUniformDistribution<unsigned int>
 {
 public:
     using type = std::uniform_int_distribution<unsigned int>;
 };
 
 template <>
-class WUniformDistribution<unsigned long>
+class _WUniformDistribution<unsigned long>
 {
 public:
     using type = std::uniform_int_distribution<unsigned long>;
 };
 
 template <>
-class WUniformDistribution<unsigned long long>
+class _WUniformDistribution<unsigned long long>
 {
 public:
     using type = std::uniform_int_distribution<unsigned long long>;
 };
 
 template <>
-class WUniformDistribution<float>
+class _WUniformDistribution<float>
 {
 public:
     using type = std::uniform_real_distribution<float>;
 };
 
 template <>
-class WUniformDistribution<double>
+class _WUniformDistribution<double>
 {
 public:
     using type = std::uniform_real_distribution<double>;
 };
 
 template <>
-class WUniformDistribution<long double>
+class _WUniformDistribution<long double>
 {
 public:
     using type = std::uniform_real_distribution<long double>;
@@ -138,7 +138,7 @@ public:
     NumberType uniformDistribution(NumberType min, NumberType max)
     {
         // 根据类型选择分布
-        return distribution<typename WUniformDistribution<NumberType>::type>(min, max);
+        return distribution<typename _WUniformDistribution<NumberType>::type>(min, max);
     }
 
     /**
