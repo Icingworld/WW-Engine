@@ -175,8 +175,8 @@ protected:
 
 public:
     template <typename SeedType, typename... Args>
-    WDistributionRandomGenerator(SeedType && seed, Args&&... args)
-        : m_engine(std::forward<SeedType>(seed))
+    WDistributionRandomGenerator(const SeedType & seed, Args&&... args)
+        : m_engine(seed)
         , m_dist(std::forward<Args>(args)...)
     {
     }
