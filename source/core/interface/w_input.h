@@ -1,0 +1,42 @@
+#pragma once
+
+#include "../math/w_math.h"
+#include "../global/w_key_code.h"
+#include "../global/w_mouse_code.h"
+
+namespace engine
+{
+
+/**
+ * @brief 全局输入
+ */
+class WInput
+{
+public:
+    /**
+     * @brief 按键是否按下
+     */
+    static bool isKeyPressed(WKeyCode code);
+
+    /**
+     * @brief 鼠标是否按下
+     */
+    static bool isMouseButtonPressed(WMouseCode code);
+
+    /**
+     * @brief 获取鼠标位置
+     */
+    static vec2 getMousePosition();
+
+    /**
+     * @brief 获取鼠标位置 X
+     */
+    static float getMouseX();
+
+    /**
+     * @brief 获取鼠标位置 Y
+     */
+    static float getMouseY();
+};
+
+} // namespace engine

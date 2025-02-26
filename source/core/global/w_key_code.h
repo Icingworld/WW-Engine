@@ -11,7 +11,7 @@ using key_code_type = unsigned short;
 /**
  * @brief 键码
  */
-enum class KeyCode
+enum class WKeyCode
     : key_code_type
 {
     // From glfw3.h

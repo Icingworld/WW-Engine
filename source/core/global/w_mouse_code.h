@@ -11,7 +11,7 @@ using mouse_code_type = unsigned char;
 /**
  * @brief 鼠标码
  */
-enum class MouseCode
+enum class WMouseCode
     : mouse_code_type
 {
     // From glfw3.h
