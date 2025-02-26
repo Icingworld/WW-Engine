@@ -1,0 +1,1 @@
+#include "w_resource_manager.h"
