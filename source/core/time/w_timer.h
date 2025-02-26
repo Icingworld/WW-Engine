@@ -2,13 +2,15 @@
 
 #include <chrono>
 
+#include "w_time.h"
+
 namespace engine
 {
 
 /**
  * @brief 计时器
  */
-class WTimer
+class WTimer final
 {
 private:
     std::chrono::high_resolution_clock::time_point m_start;      // 开始时间
@@ -27,12 +29,7 @@ public:
     /**
      * @brief 获取计时器秒数
      */
-    float elapsed();
-
-    /**
-     * @brief 获取计时器毫秒数
-     */
-    float elapsedMillis();
+    WTime elapsed();
 };
 
 } // namespace engine

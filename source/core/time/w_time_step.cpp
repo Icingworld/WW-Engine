@@ -3,19 +3,14 @@
 namespace engine
 {
 
-WTimeStep::WTimeStep(float step)
+WTimeStep::WTimeStep(WTime step)
     : m_step(step)
 {
 }
 
-float WTimeStep::getStep() const
+WTime WTimeStep::getStep() const
 {
     return m_step;
-}
-
-float WTimeStep::getStepMillis() const
-{
-    return m_step * 1000.0f;
 }
 
 } // namespace engine
