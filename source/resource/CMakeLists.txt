@@ -11,5 +11,5 @@ target_include_directories(engine-resource PUBLIC
 
 # 添加 engine-resource 依赖项
 target_link_libraries(engine-resource PUBLIC
-    third-party
+    ww-engine
 )

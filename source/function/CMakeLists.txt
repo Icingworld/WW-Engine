@@ -11,5 +11,5 @@ target_include_directories(engine-function PUBLIC
 
 # 添加 engine-function 依赖项
 target_link_libraries(engine-function PUBLIC
-    third-party
+    ww-engine
 )
