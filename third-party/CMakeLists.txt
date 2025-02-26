@@ -12,6 +12,7 @@ target_include_directories(glad PUBLIC
 )
 
 # 添加 glfw 子模块
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "Disable GLFW documentation" FORCE)
 add_subdirectory(glfw)
 
 # 添加 glm 子模块
