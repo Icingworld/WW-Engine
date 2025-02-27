@@ -16,69 +16,69 @@ WWindowBase::WWindowBase()
 }
 
 WWindowBase::WWindowBase(std::string title, int width, int height)
-    : m_data(title, width, height)
+    : m_windowData(title, width, height)
 {
 }
 
 WWindowBase::WWindowBase(const WWindowData & data)
-    : m_data(data)
+    : m_windowData(data)
 {
 }
 
 const std::string & WWindowBase::getTitle() const
 {
-    return m_data.m_title;
+    return m_windowData.m_title;
 }
 
 int WWindowBase::getWidth() const
 {
-    return m_data.m_width;
+    return m_windowData.m_width;
 }
 
 int WWindowBase::getHeight() const
 {
-    return m_data.m_height;
+    return m_windowData.m_height;
 }
 
 const WWindowData & WWindowBase::getWindowData() const
 {
-    return m_data;
+    return m_windowData;
 }
 
 void WWindowBase::setTitle(const std::string & title)
 {
-    m_data.m_title = title;
+    m_windowData.m_title = title;
 }
 
 void WWindowBase::setSize(int width, int height)
 {
-    m_data.m_width = width;
-    m_data.m_height = height;
+    m_windowData.m_width = width;
+    m_windowData.m_height = height;
 }
 
 void WWindowBase::setWidth(int width)
 {
-    m_data.m_width = width;
+    m_windowData.m_width = width;
 }
 
 void WWindowBase::setHeight(int height)
 {
-    m_data.m_height = height;
+    m_windowData.m_height = height;
 }
 
 void WWindowBase::setWindowData(std::string title, int width, int height)
 {
-    m_data = WWindowData(title, width, height);
+    m_windowData = WWindowData(title, width, height);
 }
 
 void WWindowBase::setWindowData(const WWindowData & data)
 {
-    m_data = data;
+    m_windowData = data;
 }
 
 void WWindowBase::setEventCallback(const std::function<void(WEvent &)> & callback)
 {
-    m_data.m_eventCallback = callback;
+    m_windowData.m_eventCallback = callback;
 }
 
 } // namespace engine

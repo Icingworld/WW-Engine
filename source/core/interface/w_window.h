@@ -32,7 +32,7 @@ public:
 class WWindowBase
 {
 protected:
-    WWindowData m_data;                     // 窗口数据
+    WWindowData m_windowData;           // 窗口数据
 
 public:
     WWindowBase();
