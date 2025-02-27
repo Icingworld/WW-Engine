@@ -1,10 +1,13 @@
 #pragma once
 
+#include <memory>
+
 #include <w_window.h>
 #include <w_layer_stack.h>
 #include <w_imgui_layer.h>
 
 #include "../time/w_timer.h"
+#include "../log/w_log.h"
 
 namespace engine
 {
@@ -25,11 +28,14 @@ protected:
     WTimer m_timer;                             // 计时器
 
     // 窗口
-    std::shared_ptr<WWindow> m_window;          // 窗口
+    WWindow * m_window;                         // 窗口
 
     // 图层
     WLayerStack m_layerStack;                   // 图层栈
-    std::shared_ptr<WImGuiLayer> m_imguiLayer;  // ImGui 图层
+    WImGuiLayer * m_imguiLayer;                 // ImGui 图层
+
+    // 日志
+    WLog m_log;                                 // 日志
 
 protected:
     WApplication();
@@ -74,12 +80,12 @@ public:
     /**
      * @brief 绑定窗口
      */
-    void bindWindow(std::shared_ptr<WWindow> window);
+    void bindWindow(WWindow * window);
 
     /**
      * @brief 获取窗口
      */
-    std::shared_ptr<WWindow> getWindow() const;
+    WWindow * getWindow() const;
 };
 
 } // namespace engine

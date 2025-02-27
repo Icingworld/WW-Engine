@@ -1,7 +1,5 @@
 #include "w_windows_window.h"
 
-#include <glad/glad.h>
-
 #include <w_key_event.h>
 #include <w_mouse_event.h>
 #include <w_window_event.h>

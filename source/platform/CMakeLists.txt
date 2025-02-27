@@ -7,6 +7,7 @@ add_library(engine-platform STATIC ${SOURCE_FILES})
 # 设置 engine-platform 搜索路径
 target_include_directories(engine-platform PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/file_system
+    ${CMAKE_CURRENT_SOURCE_DIR}/window
 )
 
 # 添加 engine-platform 依赖项

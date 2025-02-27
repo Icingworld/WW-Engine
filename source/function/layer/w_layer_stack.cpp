@@ -11,9 +11,10 @@ WLayerStack::WLayerStack()
 }
 
 WLayerStack::WLayerStack(std::size_t size)
-    : m_layers(size)
+    : m_layers()
     , m_layerInsertIndex(0)
 {
+    m_layers.reserve(size);
 }
 
 WLayerStack::~WLayerStack()

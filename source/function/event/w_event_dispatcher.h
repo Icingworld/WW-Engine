@@ -11,10 +11,10 @@ namespace engine
 class WEventDispatcher
 {
 protected:
-    const WEvent & m_event;        // 事件对象
+    WEvent & m_event;        // 事件对象
 
 public:
-    explicit WEventDispatcher(const WEvent & event);
+    explicit WEventDispatcher(WEvent & event);
 
     ~WEventDispatcher() = default;
 

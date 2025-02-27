@@ -78,6 +78,11 @@ public:
      * @brief 移除覆盖图层
      */
     void popOverlay(WLayer * WLayer);
+
+    std::size_t size() const
+    {
+        return m_layers.size();
+    }
 };
 
 } // namespace engine

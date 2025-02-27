@@ -7,13 +7,15 @@ namespace engine
 {
 
 WApplication::WApplication()
-    : m_isRunning(false)
+    : m_isRunning(true)
     , m_isPaused(false)
     , m_isMinimized(false)
     , m_lastFrameTime(0.0f)
     , m_timer()
     , m_window(nullptr)
     , m_layerStack()
+    , m_imguiLayer(nullptr)
+    , m_log()
 {
 }
 
@@ -25,6 +27,11 @@ WApplication & WApplication::getApplication()
 
 WApplication::~WApplication()
 {
+    if (m_imguiLayer)
+        delete m_imguiLayer;
+
+    if (m_window)
+        delete m_window;
 }
 
 void WApplication::run()
@@ -79,7 +86,7 @@ void WApplication::onEvent(WEvent & event)
 
     // 窗口关闭事件
     dispatcher.dispatch<WWindowCloseEvent>([this](WWindowCloseEvent & e) {
-        m_isRunning = false;
+        stop();
         return true;
     });
 
@@ -99,7 +106,7 @@ void WApplication::onEvent(WEvent & event)
     }
 }
 
-void WApplication::bindWindow(std::shared_ptr<WWindow> window)
+void WApplication::bindWindow(WWindow * window)
 {
     m_window = window;
 
@@ -109,11 +116,11 @@ void WApplication::bindWindow(std::shared_ptr<WWindow> window)
     });
 
     // 绑定到 ImGui 图层
-    m_imguiLayer = std::make_shared<WImGuiLayer>(m_window->getWindow());
-    pushOverlay(m_imguiLayer.get());
+    m_imguiLayer = new WImGuiLayer(m_window->getWindow());
+    pushOverlay(m_imguiLayer);
 }
 
-std::shared_ptr<WWindow> WApplication::getWindow() const
+WWindow * WApplication::getWindow() const
 {
     return m_window;
 }

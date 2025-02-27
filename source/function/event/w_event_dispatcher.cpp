@@ -3,7 +3,7 @@
 namespace engine
 {
 
-WEventDispatcher::WEventDispatcher(const WEvent & event)
+WEventDispatcher::WEventDispatcher(WEvent & event)
     : m_event(event)
 {
 }
