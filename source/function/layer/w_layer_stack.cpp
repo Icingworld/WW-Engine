@@ -5,6 +5,17 @@
 namespace engine
 {
 
+WLayerStack::WLayerStack()
+    : WLayerStack(8)
+{
+}
+
+WLayerStack::WLayerStack(std::size_t size)
+    : m_layers(size)
+    , m_layerInsertIndex(0)
+{
+}
+
 WLayerStack::~WLayerStack()
 {
     for (WLayer * layer : m_layers) {

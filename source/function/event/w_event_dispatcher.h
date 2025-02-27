@@ -22,6 +22,8 @@ public:
     /**
      * @brief 分发事件
      * @details 分发事件到事件回调函数
+     * @param func 事件回调函数，需接受EventType &作为参数
+     * @return 事件是否分发成功
      */
     template <
         class EventType,

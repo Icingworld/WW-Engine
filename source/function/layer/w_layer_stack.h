@@ -23,7 +23,9 @@ protected:
     std::size_t m_layerInsertIndex;         // 图层插入索引
 
 public:
-    WLayerStack() = default;
+    WLayerStack();
+
+    explicit WLayerStack(std::size_t size);
 
     ~WLayerStack();
 
