@@ -22,4 +22,9 @@ WApplication::~WApplication()
 {
 }
 
+std::shared_ptr<WWindow> WApplication::getWindow() const
+{
+    return m_window;
+}
+
 } // namespace engine

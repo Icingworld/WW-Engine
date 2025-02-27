@@ -25,8 +25,6 @@ protected:
     bool m_handled = false;     // 是否已处理
 
 public:
-    WEvent();
-
     explicit WEvent(WEventType type);
 
     virtual ~WEvent() = default;
