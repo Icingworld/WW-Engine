@@ -164,7 +164,7 @@ public:
 template <
     typename DistributionType,
     typename RandomEngine = std::default_random_engine
-    > class WDistributionRandomGenerator
+> class WDistributionRandomGenerator
 {
 public:
     using result_type = typename DistributionType::result_type;
@@ -174,8 +174,10 @@ protected:
     DistributionType m_dist;    // 分布
 
 public:
-    template <typename SeedType, typename... Args>
-    WDistributionRandomGenerator(const SeedType & seed, Args&&... args)
+    template <
+        typename SeedType, 
+        typename... Args
+    > WDistributionRandomGenerator(const SeedType & seed, Args&&... args)
         : m_engine(seed)
         , m_dist(std::forward<Args>(args)...)
     {
