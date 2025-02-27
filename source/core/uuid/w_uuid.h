@@ -18,7 +18,7 @@ private:
 public:
     WUUID();
 
-    virtual ~WUUID() = default;
+    ~WUUID() = default;
 
 public:
     /**

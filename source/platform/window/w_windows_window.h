@@ -32,8 +32,7 @@ public:
 
     void clear() override;
 
-public:
-    GLFWwindow * getWindow() const;
+    void * getWindow() const override;
 };
 
 } // namespace engine
