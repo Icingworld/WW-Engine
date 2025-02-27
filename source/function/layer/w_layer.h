@@ -2,8 +2,8 @@
 
 #include <string>
 
-#include "../time/w_time_step.h"
-#include "w_event_base.h"
+#include <w_time_step.h>
+#include "../event/w_event.h"
 
 namespace engine
 {

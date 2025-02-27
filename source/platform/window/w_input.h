@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../math/w_math.h"
-#include "../global/w_key_code.h"
-#include "../global/w_mouse_code.h"
+#include <w_math.h>
+#include <w_key_code.h>
+#include <w_mouse_code.h>
 
 namespace engine
 {
