@@ -16,26 +16,26 @@ WMouseCode WMouseButtonEvent::getMouseCode() const
 
 const char * WMouseButtonEvent::getName() const
 {
-    return "WMouseButtonEvent";
+    return "MouseButtonEvent";
 }
 
 WMouseButtonPressedEvent::WMouseButtonPressedEvent(WMouseCode code)
-    : WMouseButtonEvent(code, WEventType::WMouseButtonPressed)
+    : WMouseButtonEvent(code, WEventType::MouseButtonPressed)
 {
 }
 
 const char * WMouseButtonPressedEvent::getName() const
 {
-    return "WMouseButtonPressedEvent";
+    return "MouseButtonPressedEvent";
 }
 
 WEventType WMouseButtonPressedEvent::getEventType()
 {
-    return WEventType::WMouseButtonPressed;
+    return WEventType::MouseButtonPressed;
 }
 
 WMouseButtonReleasedEvent::WMouseButtonReleasedEvent(WMouseCode code)
-    : WMouseButtonEvent(code, WEventType::WMouseButtonReleased)
+    : WMouseButtonEvent(code, WEventType::MouseButtonReleased)
 {
 }
 
@@ -46,11 +46,11 @@ const char * WMouseButtonReleasedEvent::getName() const
 
 WEventType WMouseButtonReleasedEvent::getEventType()
 {
-    return WEventType::WMouseButtonReleased;
+    return WEventType::MouseButtonReleased;
 }
 
 WMouseMovedEvent::WMouseMovedEvent(float x, float y)
-    : WEvent(WEventType::WMouseMoved)
+    : WEvent(WEventType::MouseMoved)
     , m_x(x)
     , m_y(y)
 {
@@ -63,7 +63,7 @@ const char * WMouseMovedEvent::getName() const
 
 WEventType WMouseMovedEvent::getEventType()
 {
-    return WEventType::WMouseMoved;
+    return WEventType::MouseMoved;
 }
 
 float WMouseMovedEvent::getX() const
@@ -77,7 +77,7 @@ float WMouseMovedEvent::getY() const
 }
 
 WMouseScrolledEvent::WMouseScrolledEvent(float xOffset, float yOffset)
-    : WEvent(WEventType::WMouseScrolled)
+    : WEvent(WEventType::MouseScrolled)
     , m_xOffset(xOffset)
     , m_yOffset(yOffset)
 {
@@ -85,12 +85,12 @@ WMouseScrolledEvent::WMouseScrolledEvent(float xOffset, float yOffset)
 
 const char * WMouseScrolledEvent::getName() const
 {
-    return "WMouseScrolledEvent";
+    return "MouseScrolledEvent";
 }
 
 WEventType WMouseScrolledEvent::getEventType()
 {
-    return WEventType::WMouseScrolled;
+    return WEventType::MouseScrolled;
 }
 
 float WMouseScrolledEvent::getXOffset() const

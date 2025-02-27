@@ -9,10 +9,10 @@ namespace engine
 enum class WEventType
 {
     None = 0,
-    WWindowClose, WWindowResize, WWindowFocus, WWindowLostFocus, WWindowMoved,
-    WAppTick, WAppUpdate, WAppRender,
-    WKeyPressed, WKeyReleased, WKeyTyped,
-    WMouseButtonPressed, WMouseButtonReleased, WMouseMoved, WMouseScrolled
+    WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
+    AppTick, AppUpdate, AppRender,
+    KeyPressed, KeyReleased, KeyTyped,
+    MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 };
 
 /**

@@ -46,7 +46,7 @@ public:
 public:
     const char * getName() const override;
 
-    static WEventType getStaticType();
+    static WEventType getEventType();
 };
 
 /**
@@ -63,7 +63,7 @@ public:
 public:
     const char * getName() const override;
 
-    static WEventType getStaticType();
+    static WEventType getEventType();
 };
 
 class WKeyTypedEvent
@@ -77,7 +77,7 @@ public:
 public:
     const char * getName() const override;
 
-    static WEventType getStaticType();
+    static WEventType getEventType();
 };
 
 } // namespace engine

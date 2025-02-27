@@ -16,53 +16,53 @@ WKeyCode WKeyEvent::getKeyCode() const
 
 const char * WKeyEvent::getName() const
 {
-    return "WKeyEvent";
+    return "KeyEvent";
 }
 
 WKeyPressedEvent::WKeyPressedEvent(WKeyCode code, bool repeat)
-    : WKeyEvent(code, WEventType::WKeyPressed)
+    : WKeyEvent(code, WEventType::KeyPressed)
     , m_repeat(repeat)
 {
 }
 
 const char * WKeyPressedEvent::getName() const
 {
-    return "WKeyPressedEvent";
+    return "KeyPressedEvent";
 }
 
-WEventType WKeyPressedEvent::getStaticType()
+WEventType WKeyPressedEvent::getEventType()
 {
-    return WEventType::WKeyPressed;
+    return WEventType::KeyPressed;
 }
 
 WKeyReleasedEvent::WKeyReleasedEvent(WKeyCode code)
-    : WKeyEvent(code, WEventType::WKeyReleased)
+    : WKeyEvent(code, WEventType::KeyReleased)
 {
 }
 
 const char * WKeyReleasedEvent::getName() const
 {
-    return "WKeyReleasedEvent";
+    return "KeyReleasedEvent";
 }
 
-WEventType WKeyReleasedEvent::getStaticType()
+WEventType WKeyReleasedEvent::getEventType()
 {
-    return WEventType::WKeyReleased;
+    return WEventType::KeyReleased;
 }
 
 WKeyTypedEvent::WKeyTypedEvent(WKeyCode code)
-    : WKeyEvent(code, WEventType::WKeyTyped)
+    : WKeyEvent(code, WEventType::KeyTyped)
 {
 }
 
 const char * WKeyTypedEvent::getName() const
 {
-    return "WKeyTypedEvent";
+    return "KeyTypedEvent";
 }
 
-WEventType WKeyTypedEvent::getStaticType()
+WEventType WKeyTypedEvent::getEventType()
 {
-    return WEventType::WKeyTyped;
+    return WEventType::KeyTyped;
 }
 
 } // namespace engine
