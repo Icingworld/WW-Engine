@@ -64,11 +64,6 @@ public:
      */
     virtual void clear() = 0;
 
-    /**
-     * @brief 获取窗口句柄
-     */
-    virtual void * getWindow() const = 0;
-
 public:
     /**
      * @brief 获取窗口标题
