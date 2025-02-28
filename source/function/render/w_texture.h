@@ -1,5 +1,10 @@
 #pragma once
 
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
+#include <w_file_system.h>
+
 namespace engine
 {
 
@@ -18,16 +23,83 @@ enum class TextureType
     TextureDepth            // 深度纹理
 };
 
-class Texture
+/**
+ * @brief 纹理基类
+ */
+class WTexture
 {
 protected:
-    unsigned int m_id;      // 纹理 ID
-    TextureType m_type;     // 纹理类型
+    TextureType m_type;         // 纹理类型
+    GLuint m_textureID;         // 纹理 ID
 
 public:
-    Texture();
+    explicit WTexture(TextureType type);
 
-    virtual ~Texture() = default;
+    WTexture(const WTexture &) = delete;
+
+    WTexture &operator=(const WTexture &) = delete;
+
+    virtual ~WTexture() = default;
+
+public:
+    /**
+     * @brief 绑定纹理
+     * @param slot 纹理槽
+     */
+    virtual void bind(unsigned int slot = 0) const = 0;
+
+    /**
+     * @brief 解绑纹理
+     */
+    virtual void unbind() const = 0;
+
+    /**
+     * @brief 获取纹理 ID
+     * @return 纹理 ID
+     */
+    GLuint getTextureId() const;
+};
+
+/**
+ * @brief 2D 纹理
+ */
+class WTexture2D
+    : public WTexture
+{
+protected:
+    int m_width;       // 纹理宽度
+    int m_height;      // 纹理高度
+    int m_channels;    // 纹理通道数
+    GLenum m_format;   // 纹理格式
+
+public:
+    WTexture2D(int width, int height, GLenum format);
+
+    explicit WTexture2D(const std::string & path);
+
+    WTexture2D(const void * data, int width, int height, GLenum format);
+
+    ~WTexture2D() override;
+
+public:
+    void bind(unsigned int slot = 0) const override;
+
+    void unbind() const override;
+
+    /**
+     * @brief 设置纹理参数
+     * @param wrapS 横向纹理环绕方式
+     * @param wrapT 纵向纹理环绕方式
+     * @param minFilter 最小过滤方式
+     * @param magFilter 最大过滤方式
+     */
+    void setTextureParams(GLint wrapS, GLint wrapT, GLint minFilter, GLint magFilter);
+
+    int getWidth() const;
+
+    int getHeight() const;
+
+    int getChannels() const;
 };
 
 } // namespace engine
