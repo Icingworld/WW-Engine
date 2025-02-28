@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <array>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -195,6 +196,61 @@ public:
      * @brief 获取纹理层数
      */
     int getLayers() const;
+};
+
+/**
+ * @brief 立方体纹理
+ */
+class WTextureCube
+    : public WTexture
+{
+protected:
+    int m_width;       // 纹理宽度
+    int m_height;      // 纹理高度
+    int m_channels;    // 纹理通道数
+    GLenum m_format;   // 纹理格式
+
+public:
+    WTextureCube(int width, int height, GLenum format);
+
+    explicit WTextureCube(const std::array<std::string, 6> & paths);
+
+    ~WTextureCube() override;
+
+public:
+    /**
+     * @brief 绑定纹理
+     * @param slot 绑定的纹理单元
+     */
+    void bind(unsigned int slot = 0) const override;
+
+    /**
+     * @brief 解绑纹理
+     */
+    void unbind() const override;
+
+    /**
+     * @brief 设置纹理参数
+     * @param wrapMode 纹理环绕方式
+     * @param minFilter 最小过滤方式
+     * @param magFilter 最大过滤方式
+     */
+    void setTextureParams(GLint wrapMode, GLint minFilter, GLint magFilter);
+
+    /**
+     * @brief 获取纹理宽度
+     */
+    int getWidth() const;
+
+    /**
+     * @brief 获取纹理高度
+     */
+    int getHeight() const;
+
+    /**
+     * @brief 获取纹理通道数
+     */
+    int getChannels() const;
 };
 
 } // namespace engine

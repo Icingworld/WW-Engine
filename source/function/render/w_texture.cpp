@@ -177,10 +177,12 @@ WTexture2DArray::WTexture2DArray(const std::vector<std::string> & paths)
             return;
         }
 
-        if (m_channels == 3)
+        if (m_channels == 3) {
             m_format = GL_RGB;
-        else if (m_channels == 4)
+        }
+        else if (m_channels == 4) {
             m_format = GL_RGBA;
+        }
 
         glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, i, m_width, m_height, 1, m_format, GL_UNSIGNED_BYTE, data);
 
@@ -272,6 +274,105 @@ int WTexture2DArray::getChannels() const
 int WTexture2DArray::getLayers() const
 {
     return m_layers;
+}
+
+WTextureCube::WTextureCube(int width, int height, GLenum format)
+    : WTexture(TextureType::TextureCube)
+    , m_width(width)
+    , m_height(height)
+    , m_channels(0)
+    , m_format(format)
+{
+    glGenTextures(1, &m_textureID);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, m_textureID);
+
+    for (GLuint i = 0; i < 6; ++i) {
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, nullptr);
+    }
+
+    setTextureParams(GL_CLAMP_TO_EDGE, GL_LINEAR, GL_LINEAR);
+
+    glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+}
+
+WTextureCube::WTextureCube(const std::array<std::string, 6> & paths)
+    : WTexture(TextureType::TextureCube)
+    , m_width(0)
+    , m_height(0)
+    , m_channels(0)
+    , m_format(0)
+{
+    stbi_set_flip_vertically_on_load(1);
+
+    glGenTextures(1, &m_textureID);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, m_textureID);
+
+    unsigned char * data = nullptr;
+    for (GLuint i = 0; i < 6; ++i) {
+        data = stbi_load(paths[i].c_str(), &m_width, &m_height, &m_channels, 0);
+
+        if (!data) {
+            std::cerr << "Error: Failed to load texture: " << paths[i] << std::endl;
+            return;
+        }
+
+        if (m_channels == 3) {
+            m_format = GL_RGB;
+        }
+        else if (m_channels == 4) {
+            m_format = GL_RGBA;
+        }
+
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, m_format, m_width, m_height, 0, m_format, GL_UNSIGNED_BYTE, data);
+
+        stbi_image_free(data);
+    }
+
+    setTextureParams(GL_CLAMP_TO_EDGE, GL_LINEAR, GL_LINEAR);
+
+    glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+}
+
+WTextureCube::~WTextureCube()
+{
+    glDeleteTextures(1, &m_textureID);
+}
+
+void WTextureCube::bind(unsigned int slot) const
+{
+    glActiveTexture(GL_TEXTURE0 + slot);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, m_textureID);
+}
+
+void WTextureCube::unbind() const
+{
+    glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+}
+
+void WTextureCube::setTextureParams(GLint wrapMode, GLint minFilter, GLint magFilter)
+{
+    glBindTexture(GL_TEXTURE_CUBE_MAP, m_textureID);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, wrapMode);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, wrapMode);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, wrapMode);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, minFilter);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, magFilter);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+}
+
+int WTextureCube::getWidth() const
+{
+    return m_width;
+}
+
+int WTextureCube::getHeight() const
+{
+    return m_height;
+}
+
+int WTextureCube::getChannels() const
+{
+    return m_channels;
 }
 
 } // namespace engine
