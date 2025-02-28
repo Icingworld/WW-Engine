@@ -113,6 +113,13 @@ void WTexture2D::setTextureParams(GLint wrapS, GLint wrapT, GLint minFilter, GLi
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
+void WTexture2D::updateData(const void * data)
+{
+    glBindTexture(GL_TEXTURE_2D, m_textureID);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, m_width, m_height, m_format, GL_UNSIGNED_BYTE, data);
+    glBindTexture(GL_TEXTURE_2D, 0);
+}
+
 int WTexture2D::getWidth() const
 {
     return m_width;
@@ -126,6 +133,145 @@ int WTexture2D::getHeight() const
 int WTexture2D::getChannels() const
 {
     return m_channels;
+}
+
+WTexture2DArray::WTexture2DArray(int width, int height, int layers, GLenum format)
+    : WTexture(TextureType::Texture2DArray)
+    , m_width(width)
+    , m_height(height)
+    , m_channels(0)
+    , m_layers(layers)
+    , m_format(format)
+{
+    glGenTextures(1, &m_textureID);
+    glBindTexture(GL_TEXTURE_2D_ARRAY, m_textureID);
+
+    // 创建空的 2D 纹理数组
+    glTexImage3D(GL_TEXTURE_2D_ARRAY, 0, format, width, height, layers, 0, format, GL_UNSIGNED_BYTE, nullptr);
+
+    setTextureParams(GL_REPEAT, GL_REPEAT, GL_LINEAR, GL_LINEAR);
+
+    glBindTexture(GL_TEXTURE_2D_ARRAY, 0);
+}
+
+WTexture2DArray::WTexture2DArray(const std::vector<std::string> & paths)
+    : WTexture(TextureType::Texture2DArray)
+    , m_width(0)
+    , m_height(0)
+    , m_channels(0)
+    , m_layers(paths.size())
+    , m_format(0)
+{
+    stbi_set_flip_vertically_on_load(1);
+
+    glGenTextures(1, &m_textureID);
+    glBindTexture(GL_TEXTURE_2D_ARRAY, m_textureID);
+
+    unsigned char * data = nullptr;
+    // 假设所有图像的尺寸相同
+    for (int i = 0; i < m_layers; ++i) {
+        data = stbi_load(paths[i].c_str(), &m_width, &m_height, &m_channels, 0);
+
+        if (!data) {
+            std::cerr << "Error: Failed to load texture: " << paths[i] << std::endl;
+            return;
+        }
+
+        if (m_channels == 3)
+            m_format = GL_RGB;
+        else if (m_channels == 4)
+            m_format = GL_RGBA;
+
+        glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, i, m_width, m_height, 1, m_format, GL_UNSIGNED_BYTE, data);
+
+        stbi_image_free(data);
+    }
+
+    glGenerateMipmap(GL_TEXTURE_2D_ARRAY);
+
+    setTextureParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR);
+
+    glBindTexture(GL_TEXTURE_2D_ARRAY, 0);
+}
+
+WTexture2DArray::WTexture2DArray(const std::vector<void *> & data, int width, int height, GLenum format)
+    : WTexture(TextureType::Texture2DArray)
+    , m_width(width)
+    , m_height(height)
+    , m_channels(0)
+    , m_layers(data.size())
+    , m_format(format)
+{
+    glGenTextures(1, &m_textureID);
+    glBindTexture(GL_TEXTURE_2D_ARRAY, m_textureID);
+
+    for (int i = 0; i < m_layers; ++i) {
+        glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, i, m_width, m_height, 1, m_format, GL_UNSIGNED_BYTE, data[i]);
+    }
+
+    glGenerateMipmap(GL_TEXTURE_2D_ARRAY);
+
+    setTextureParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR);
+
+    glBindTexture(GL_TEXTURE_2D_ARRAY, 0);
+}
+
+WTexture2DArray::~WTexture2DArray()
+{
+    glDeleteTextures(1, &m_textureID);
+}
+
+void WTexture2DArray::bind(unsigned int slot) const
+{
+    glActiveTexture(GL_TEXTURE0 + slot);
+    glBindTexture(GL_TEXTURE_2D_ARRAY, m_textureID);
+}
+
+void WTexture2DArray::unbind() const
+{
+    glBindTexture(GL_TEXTURE_2D_ARRAY, 0);
+}
+
+void WTexture2DArray::setTextureParams(GLint wrapS, GLint wrapT, GLint minFilter, GLint magFilter)
+{
+    glBindTexture(GL_TEXTURE_2D_ARRAY, m_textureID);
+    glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_S, wrapS);
+    glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_T, wrapT);
+    glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, minFilter);
+    glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, magFilter);
+    glBindTexture(GL_TEXTURE_2D_ARRAY, 0);
+}
+
+void WTexture2DArray::updateLayerData(const void * data, int layer)
+{
+    if (layer < 0 || layer >= m_layers) {
+        std::cerr << "Error: Invalid layer index" << std::endl;
+        return;
+    }
+
+    glBindTexture(GL_TEXTURE_2D_ARRAY, m_textureID);
+    glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, layer, m_width, m_height, 1, m_format, GL_UNSIGNED_BYTE, data);
+    glBindTexture(GL_TEXTURE_2D_ARRAY, 0);
+}
+
+int WTexture2DArray::getWidth() const
+{
+    return m_width;
+}
+
+int WTexture2DArray::getHeight() const
+{
+    return m_height;
+}
+
+int WTexture2DArray::getChannels() const
+{
+    return m_channels;
+}
+
+int WTexture2DArray::getLayers() const
+{
+    return m_layers;
 }
 
 } // namespace engine
