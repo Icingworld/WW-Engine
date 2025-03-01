@@ -86,8 +86,10 @@ void WShader::setFloatArray(const std::string & name, float * values, unsigned i
 void WShader::compileAndLink(const std::string & vertexPath, const std::string & fragmentPath)
 {
     // 读取代码
-    std::string vertexCode = WFileSystem::readTextFile(vertexPath);
-    std::string fragmentCode = WFileSystem::readTextFile(fragmentPath);
+    auto vertFullPath = WFileSystem::getAbsolutePath(vertexPath);
+    auto fragFullPath = WFileSystem::getAbsolutePath(fragmentPath);
+    std::string vertexCode = WFileSystem::readTextFile(vertFullPath);
+    std::string fragmentCode = WFileSystem::readTextFile(fragFullPath);
 
     const char * vertexShaderCode = vertexCode.c_str();
     const char * fragmentShaderCode = fragmentCode.c_str();

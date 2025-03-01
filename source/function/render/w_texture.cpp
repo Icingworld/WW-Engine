@@ -5,6 +5,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
+#include <w_file_system.h>
+
 namespace engine
 {
 
@@ -45,7 +47,8 @@ WTexture2D::WTexture2D(const std::string & path)
 {
     // 加载图像
     stbi_set_flip_vertically_on_load(1);
-    unsigned char * data = stbi_load(path.c_str(), &m_width, &m_height, &m_channels, 0);
+    auto fullPath = WFileSystem::getAbsolutePath(path);
+    unsigned char * data = stbi_load(fullPath.string().c_str(), &m_width, &m_height, &m_channels, 0);
 
     if (!data) {
         std::cerr << "Failed to load texture: " << path << std::endl;
@@ -170,7 +173,8 @@ WTexture2DArray::WTexture2DArray(const std::vector<std::string> & paths)
     unsigned char * data = nullptr;
     // 假设所有图像的尺寸相同
     for (int i = 0; i < m_layers; ++i) {
-        data = stbi_load(paths[i].c_str(), &m_width, &m_height, &m_channels, 0);
+        auto fullPath = WFileSystem::getAbsolutePath(paths[i]);
+        data = stbi_load(fullPath.string().c_str(), &m_width, &m_height, &m_channels, 0);
 
         if (!data) {
             std::cerr << "Error: Failed to load texture: " << paths[i] << std::endl;
@@ -302,14 +306,13 @@ WTextureCube::WTextureCube(const std::array<std::string, 6> & paths)
     , m_channels(0)
     , m_format(0)
 {
-    stbi_set_flip_vertically_on_load(1);
-
     glGenTextures(1, &m_textureID);
     glBindTexture(GL_TEXTURE_CUBE_MAP, m_textureID);
 
     unsigned char * data = nullptr;
     for (GLuint i = 0; i < 6; ++i) {
-        data = stbi_load(paths[i].c_str(), &m_width, &m_height, &m_channels, 0);
+        auto fullPath = WFileSystem::getAbsolutePath(paths[i]);
+        data = stbi_load(fullPath.string().c_str(), &m_width, &m_height, &m_channels, 0);
 
         if (!data) {
             std::cerr << "Error: Failed to load texture: " << paths[i] << std::endl;
