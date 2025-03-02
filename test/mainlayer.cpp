@@ -6,6 +6,7 @@
 
 MainLayer::MainLayer(const std::string & name)
     : engine::WLayer(name)
+    , m_sandCube()
     , m_skyBox()
     , m_camera()
 {
@@ -17,6 +18,7 @@ MainLayer::~MainLayer()
 
 void MainLayer::onAttach()
 {
+    m_sandCube.init();
     m_skyBox.init();
 }
 
@@ -39,6 +41,15 @@ void MainLayer::onUpdate(engine::WTimeStep ts)
     // 更新摄像机
     m_camera.updateViewMatrix();
     m_camera.updateProjectionMatrix();
+
+    // 设置沙子参数
+    m_sandCube.m_sandCubeShader.use();
+    m_sandCube.m_sandCubeShader.setMat4("model", engine::mat4(1.0f));
+    m_sandCube.m_sandCubeShader.setMat4("view", m_camera.getViewMatrix());
+    m_sandCube.m_sandCubeShader.setMat4("projection", m_camera.getProjectionMatrix());
+
+    // 绘制沙子
+    m_sandCube.draw();
 
     glDepthFunc(GL_LEQUAL);
 

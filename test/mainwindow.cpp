@@ -3,7 +3,7 @@
 #include "mainlayer.h"
 
 MainWindow::MainWindow()
-    : engine::WWindow("Hello WW-Engine", 1280, 720)
+    : engine::WWindow("Hello WW-Engine", 800, 800)
     , m_app(engine::WApplication::getApplication())
 {
     // 设置GL参数

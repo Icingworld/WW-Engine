@@ -46,7 +46,7 @@ WTexture2D::WTexture2D(const std::string & path)
     , m_format(0)
 {
     // 加载图像
-    stbi_set_flip_vertically_on_load(1);
+    stbi_set_flip_vertically_on_load(true);
     auto fullPath = WFileSystem::getAbsolutePath(path);
     unsigned char * data = stbi_load(fullPath.string().c_str(), &m_width, &m_height, &m_channels, 0);
 
@@ -165,7 +165,7 @@ WTexture2DArray::WTexture2DArray(const std::vector<std::string> & paths)
     , m_layers(paths.size())
     , m_format(0)
 {
-    stbi_set_flip_vertically_on_load(1);
+    stbi_set_flip_vertically_on_load(true);
 
     glGenTextures(1, &m_textureID);
     glBindTexture(GL_TEXTURE_2D_ARRAY, m_textureID);
@@ -306,6 +306,8 @@ WTextureCube::WTextureCube(const std::array<std::string, 6> & paths)
     , m_channels(0)
     , m_format(0)
 {
+    stbi_set_flip_vertically_on_load(false);
+
     glGenTextures(1, &m_textureID);
     glBindTexture(GL_TEXTURE_CUBE_MAP, m_textureID);
 

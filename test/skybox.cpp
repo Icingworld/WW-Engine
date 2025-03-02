@@ -3,7 +3,7 @@
 Skybox::Skybox()
     : m_skyBoxVAO(0)
     , m_skyBoxVBO(0)
-    , m_skyBoxShader("assets/shader/skybox.vs", "assets/shader/skybox.fs")
+    , m_skyBoxShader("assets/shader/skybox/skybox.vs", "assets/shader/skybox/skybox.fs")
     , m_skyBoxTexture(std::array<std::string, 6>({
         "assets/texture/skybox/right.jpg",
         "assets/texture/skybox/left.jpg",

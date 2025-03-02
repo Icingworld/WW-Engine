@@ -5,6 +5,7 @@
 #include <w_key_event.h>
 #include <w_mouse_event.h>
 
+#include "cube.h"
 #include "skybox.h"
 
 /**
@@ -14,6 +15,7 @@ class MainLayer
     : public engine::WLayer
 {
 private:
+    SandCube m_sandCube;            // 沙子
     Skybox m_skyBox;                // 天空盒
     engine::WCamera m_camera;       // 相机
 
