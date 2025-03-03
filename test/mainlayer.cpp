@@ -7,6 +7,7 @@
 MainLayer::MainLayer(const std::string & name)
     : engine::WLayer(name)
     , m_sandCube()
+    , m_dirtCube()
     , m_skyBox()
     , m_camera()
 {
@@ -42,6 +43,16 @@ void MainLayer::onUpdate(engine::WTimeStep ts)
     m_camera.updateViewMatrix();
     m_camera.updateProjectionMatrix();
 
+    // 设置泥土参数
+    m_dirtCube.m_dirtCubeShader.use();
+    engine::mat4 model = engine::mat4(1.0f);
+    m_dirtCube.m_dirtCubeShader.setMat4("model", engine::translate(model, engine::vec3(2.0f, 2.0f, 2.0f)));
+    m_dirtCube.m_dirtCubeShader.setMat4("view", m_camera.getViewMatrix());
+    m_dirtCube.m_dirtCubeShader.setMat4("projection", m_camera.getProjectionMatrix());
+
+    // 绘制泥土
+    m_dirtCube.draw();
+
     // 设置沙子参数
     m_sandCube.m_sandCubeShader.use();
     m_sandCube.m_sandCubeShader.setMat4("model", engine::mat4(1.0f));
@@ -49,7 +60,7 @@ void MainLayer::onUpdate(engine::WTimeStep ts)
     m_sandCube.m_sandCubeShader.setMat4("projection", m_camera.getProjectionMatrix());
 
     // 绘制沙子
-    m_sandCube.draw();
+    // m_sandCube.draw();
 
     glDepthFunc(GL_LEQUAL);
 

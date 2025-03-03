@@ -16,6 +16,7 @@ class MainLayer
 {
 private:
     SandCube m_sandCube;            // 沙子
+    DirtCube m_dirtCube;            // 泥土
     Skybox m_skyBox;                // 天空盒
     engine::WCamera m_camera;       // 相机
 
